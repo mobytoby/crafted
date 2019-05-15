@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Crafted.Data
+namespace Crafted.DTO
 {
     public class Class1
     {
