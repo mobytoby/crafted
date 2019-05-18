@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  crafted.api:
+    image: ${DOCKER_REGISTRY-}craftedapi
+    build:
+      context: .
+      dockerfile: Crafted.Api/Dockerfile
