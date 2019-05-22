@@ -20,9 +20,9 @@ namespace Crafted.Api.Controllers
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Blog>> Get()
+        public ActionResult<IEnumerable<MenuItem>> Get()
         {
-            var blogs = Context.Blogs.ToList();
+            var blogs = Context.MenuItems.ToList();
             return blogs;
         }
 
@@ -37,11 +37,6 @@ namespace Crafted.Api.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-            Context.Blogs.Add(new Blog
-            {
-                Url = value
-            });
-            Context.SaveChangesAsync().Wait();
         }
 
         // PUT api/values/5

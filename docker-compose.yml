@@ -2,15 +2,19 @@ version: '3.4'
 
 services:
   sql.data:
+    container_name: "crafted_sql"
     image: microsoft/mssql-server-linux:2017-latest
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
-      - "3333:1433"
+      - "1433:1433"
   crafted.api:
+    container_name: "crafted.api"
+    depends_on: 
+      - "sql.data"
     image: ${DOCKER_REGISTRY-}craftedapi
-    ports: 
+    ports:
       - "80:80"
     build:
       context: .
