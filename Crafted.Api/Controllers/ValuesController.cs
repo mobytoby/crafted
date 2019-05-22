@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Crafted.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crafted.Api.Controllers
@@ -10,11 +11,19 @@ namespace Crafted.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private CraftedContext Context { get; }
+
+        public ValuesController(CraftedContext context)
+        {
+            Context = context;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Blog>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var blogs = Context.Blogs.ToList();
+            return blogs;
         }
 
         // GET api/values/5
@@ -28,6 +37,11 @@ namespace Crafted.Api.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            Context.Blogs.Add(new Blog
+            {
+                Url = value
+            });
+            Context.SaveChangesAsync().Wait();
         }
 
         // PUT api/values/5
