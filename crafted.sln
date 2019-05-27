@@ -15,6 +15,46 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crafted.Data", "Crafted.Dat
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5C653B35-120A-4FF7-BB1A-450489B6C9D3}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "beerlink", "beerlink\", "{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_61042"
+		Debug.AspNetCompiler.PhysicalPath = "beerlink\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61042\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_61042"
+		Release.AspNetCompiler.PhysicalPath = "beerlink\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61042\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "61042"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "beerhub", "beerhub\", "{97325980-2A84-4046-AD9A-7C1F17E2EA61}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_61053"
+		Debug.AspNetCompiler.PhysicalPath = "beerhub\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61053\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_61053"
+		Release.AspNetCompiler.PhysicalPath = "beerhub\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61053\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "61053"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +137,30 @@ Global
 		{5C653B35-120A-4FF7-BB1A-450489B6C9D3}.Release|x64.Build.0 = Release|Any CPU
 		{5C653B35-120A-4FF7-BB1A-450489B6C9D3}.Release|x86.ActiveCfg = Release|Any CPU
 		{5C653B35-120A-4FF7-BB1A-450489B6C9D3}.Release|x86.Build.0 = Release|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Debug|x64.Build.0 = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Debug|x86.Build.0 = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Release|x64.ActiveCfg = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Release|x64.Build.0 = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Release|x86.ActiveCfg = Debug|Any CPU
+		{230EE06E-047F-47DC-BE0D-4F7E2DFE3597}.Release|x86.Build.0 = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Debug|x64.Build.0 = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Debug|x86.Build.0 = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Release|x64.ActiveCfg = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Release|x64.Build.0 = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Release|x86.ActiveCfg = Debug|Any CPU
+		{97325980-2A84-4046-AD9A-7C1F17E2EA61}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
