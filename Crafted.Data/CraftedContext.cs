@@ -14,5 +14,7 @@ namespace Crafted.Data
         public DbSet<Modification> Modifications { get; set; }
 
         public DbSet<ModificationCategory> ModificationCategories { get; set; }
+
+        public DbSet<AppUser> Users { get; set; }
     }
 }
