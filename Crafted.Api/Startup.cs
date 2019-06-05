@@ -36,7 +36,8 @@ namespace Crafted.Api
 
 
             var connection = Configuration.GetConnectionString("CraftedDb");
-            services.AddDbContext<CraftedContext>(opt => opt.UseSqlServer(connection));
+            services.AddDbContext<CraftedContext>(opt => 
+                opt.UseSqlServer(connection, b=> b.MigrationsAssembly("Crafted.Data")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
