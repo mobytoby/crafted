@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace Crafted.Data
 {
-    public class CraftedContext : DbContext
+    public class CraftedContext : IdentityDbContext<AppUser>
     {
         public CraftedContext(DbContextOptions context): base(context) {}
 
@@ -14,7 +15,5 @@ namespace Crafted.Data
         public DbSet<Modification> Modifications { get; set; }
 
         public DbSet<ModificationCategory> ModificationCategories { get; set; }
-
-        public DbSet<AppUser> Users { get; set; }
     }
 }

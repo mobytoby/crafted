@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Crafted.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +40,12 @@ namespace Crafted.Api
             var connection = Configuration.GetConnectionString("CraftedDb");
             services.AddDbContext<CraftedContext>(opt => 
                 opt.UseSqlServer(connection, b=> b.MigrationsAssembly("Crafted.Data")));
+            var assemblies = new Assembly[] {
+                Assembly.GetAssembly(typeof(Startup)),
+                Assembly.GetExecutingAssembly().
+            }
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
