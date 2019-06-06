@@ -44,6 +44,7 @@ namespace Crafted.Data.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     FacebookId = table.Column<long>(nullable: true),
+                    GoogleId = table.Column<long>(nullable: true),
                     PictureUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

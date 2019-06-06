@@ -38,6 +38,8 @@ namespace Crafted.Data.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<long?>("GoogleId");
+
                     b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");

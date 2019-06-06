@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crafted.Data.Migrations
 {
     [DbContext(typeof(CraftedContext))]
-    [Migration("20190605041445_initial")]
+    [Migration("20190605224117_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,8 @@ namespace Crafted.Data.Migrations
                     b.Property<long?>("FacebookId");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<long?>("GoogleId");
 
                     b.Property<string>("LastName");
 

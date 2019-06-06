@@ -40,10 +40,6 @@ namespace Crafted.Api
             var connection = Configuration.GetConnectionString("CraftedDb");
             services.AddDbContext<CraftedContext>(opt => 
                 opt.UseSqlServer(connection, b=> b.MigrationsAssembly("Crafted.Data")));
-            var assemblies = new Assembly[] {
-                Assembly.GetAssembly(typeof(Startup)),
-                Assembly.GetExecutingAssembly().
-            }
 
             services.AddAutoMapper(typeof(Startup));
         }

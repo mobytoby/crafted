@@ -1,4 +1,5 @@
 ﻿using Crafted.Data.Interfaces;
+using Crafted.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,11 +15,5 @@ namespace Crafted.Data
         public virtual ICollection<Category> Categories { get; set; }
         
         public virtual ICollection<MenuItem> MenuItems { get; set; }
-    }
-
-    public enum CategoryType
-    {
-        Category = 1,
-        MenuItem = 2
     }
 }
