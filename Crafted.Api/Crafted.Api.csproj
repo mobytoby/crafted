@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Crafted.Util\Crafted.Util.csproj" />
     <ProjectReference Include="..\Crafted.Data\Crafted.Data.csproj" />
     <ProjectReference Include="..\Crafted.DTO\Crafted.DTO.csproj" />
   </ItemGroup>

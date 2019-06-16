@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Crafted.Util\Crafted.Util.csproj" />
+    <ProjectReference Include="..\Crafted.Util\Crafted.Util.csproj" />
   </ItemGroup>
-
 </Project>

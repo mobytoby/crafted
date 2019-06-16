@@ -15,6 +15,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Crafted.Util\Crafted.Util.csproj" />
+    <ProjectReference Include="..\Crafted.Util\Crafted.Util.csproj" />
   </ItemGroup>
 </Project>
