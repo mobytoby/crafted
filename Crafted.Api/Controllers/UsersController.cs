@@ -16,11 +16,11 @@ namespace Crafted.Api.Controllers
     public class UsersController : ControllerBase
     {
         private CraftedContext Context { get; }
-        private Mapper Mapper { get; }
+        private IMapper Mapper { get; }
         private UserManager<AppUser> UserManager { get; }
 
 
-        public UsersController(CraftedContext context, Mapper mapper, UserManager<AppUser> userManager)
+        public UsersController(CraftedContext context, IMapper mapper, UserManager<AppUser> userManager)
         {
             Context = context;
             Mapper = mapper;

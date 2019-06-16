@@ -4,10 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using Crafted.Api.Mapping;
 using Crafted.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +43,22 @@ namespace Crafted.Api
             services.AddDbContext<CraftedContext>(opt => 
                 opt.UseSqlServer(connection, b=> b.MigrationsAssembly("Crafted.Data")));
 
-            services.AddAutoMapper(typeof(Startup));
+            // Add Identity
+            var builder = services.AddIdentityCore<AppUser>(o =>
+            {
+                // configure identity options
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+            });
+            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
+            builder.AddEntityFrameworkStores<CraftedContext>().AddDefaultTokenProviders();
+
+            // Auto Mapper Configurations
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
