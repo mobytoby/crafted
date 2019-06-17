@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Crafted.Api.Config;
 using Crafted.Api.Mapping;
 using Crafted.Data;
 using Microsoft.AspNetCore.Builder;
@@ -16,12 +18,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Crafted.Api
 {
     public class Startup
     {
+        private const string SecretKey = "webwutmmjrr72yys599web2bui239jnewu"; // todo: get this from somewhere secure
+        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,7 +41,7 @@ namespace Crafted.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Crafted API", Version = "v1" });
             });
 
 
@@ -56,6 +62,8 @@ namespace Crafted.Api
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
             builder.AddEntityFrameworkStores<CraftedContext>().AddDefaultTokenProviders();
 
+            JwtConfig.ConfigJwt(Configuration, services, _signingKey);
+
             // Auto Mapper Configurations
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddMvc();
@@ -67,7 +75,7 @@ namespace Crafted.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Values v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crafted v1");
             });
 
             if (env.IsDevelopment())

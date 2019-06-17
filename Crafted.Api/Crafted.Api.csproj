@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Crafted.Data\Crafted.Data.csproj" />
     <ProjectReference Include="..\Crafted.DTO\Crafted.DTO.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Auth\" />
+  </ItemGroup>
 </Project>
