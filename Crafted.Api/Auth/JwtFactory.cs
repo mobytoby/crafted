@@ -15,7 +15,7 @@ namespace Crafted.Api.Auth
         ClaimsIdentity GenerateClaimsIdentity(string userName, string id);
     }
 
-    public class JwtFactory
+    public class JwtFactory : IJwtFactory
     {
         private readonly JwtIssuerOptions _jwtOptions;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Crafted.Api.Auth;
 using Crafted.Api.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,8 @@ namespace Crafted.Api.Config
         {
             var jwtAppSettingOptions = configuration.GetSection(nameof(JwtIssuerOptions));
 
+            services.AddSingleton<IJwtFactory, JwtFactory>();
+
             // Configure JwtIssuerOptions
             services.Configure<JwtIssuerOptions>(options =>
             {
@@ -20,6 +23,7 @@ namespace Crafted.Api.Config
                 options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
                 options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             });
+
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
