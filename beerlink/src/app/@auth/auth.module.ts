@@ -63,7 +63,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
             method: 'post',
           },
           register: {
-            endpoint: '/auth/sign-up',
+            endpoint: '/users',
             method: 'post',
           },
           logout: {

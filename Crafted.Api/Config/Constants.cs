@@ -7,7 +7,8 @@ namespace Crafted.Api.Config
         {
             public static class JwtClaimIdentifiers
             {
-                public const string Rol = "rol", Id = "id";
+                public const string Rol = "rol";
+                public const string Id = "id";
             }
 
             public static class JwtClaims

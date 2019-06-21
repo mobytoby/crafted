@@ -63,7 +63,14 @@ namespace Crafted.Api
             builder.AddEntityFrameworkStores<CraftedContext>().AddDefaultTokenProviders();
 
             JwtConfig.ConfigJwt(Configuration, services, _signingKey);
-
+            services.AddCors(options => {
+                options.AddPolicy("DevPolicy", b =>
+                    {
+                        b.WithOrigins("http://localhost:4200");
+                        b.AllowAnyHeader();
+                        b.AllowAnyMethod();
+                    });
+            });
             // Auto Mapper Configurations
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddMvc();
@@ -95,6 +102,7 @@ namespace Crafted.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("DevPolicy");
             app.UseMvc();
         }
     }
