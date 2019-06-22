@@ -45,7 +45,7 @@ const socialLinks = [
 ];
 
 export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
-  return ['/auth/login', '/auth/sign-up', '/auth/request-pass']
+  return ['/auth/login', '/users', '/auth/request-pass']
     .some(url => req.url.includes(url));
 }
 
