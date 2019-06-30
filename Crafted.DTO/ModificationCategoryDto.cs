@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Crafted.DTO
 {
-    class ModificationCategoryDto
+    public class ModificationCategoryDto
     {
     }
 }
