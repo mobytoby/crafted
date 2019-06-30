@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Crafted.DTO
 {
-    public class CreatedMenuItemDto
+    public class MenuItemDto
     {
         public int Id { get; set; }
 

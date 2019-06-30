@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Crafted.Data;
 using Crafted.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,29 +22,26 @@ namespace Crafted.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<MenuItemDto>> Get()
+        public ActionResult<IEnumerable<CreatedMenuItemDto>> Get()
         {
             var menuItems = Context.MenuItems.ToList();
-            var dtos = Mapper.Map<IEnumerable<MenuItem>, IEnumerable<MenuItemDto>>(menuItems);
+            var dtos = Mapper.Map<IEnumerable<MenuItem>, IEnumerable<CreatedMenuItemDto>>(menuItems);
             return Ok(dtos);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<MenuItem> Get(int id)
+        public ActionResult<MenuItemDto> Get(int id)
         {
             var item = Context.MenuItems.SingleOrDefault(i => i.Id == id);
             if (item == null)
             {
                 return NotFound();
             }
-            else
-            {
-                return Ok(item);
-            }
+            return Ok(item);
         }
 
         [HttpPost]
-        public void Post([FromBody]MenuItemDto menuItem)
+        public void Post([FromBody]CreatedMenuItemDto menuItem)
         {
             var dbItem = Mapper.Map<MenuItem>(menuItem);
             Context.MenuItems.Add(dbItem);

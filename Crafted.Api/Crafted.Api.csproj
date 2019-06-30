@@ -34,4 +34,7 @@
     <Folder Include="Auth\" />
     <Folder Include="Util\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\IActionResult.cs" />
+  </ItemGroup>
 </Project>
