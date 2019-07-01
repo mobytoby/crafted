@@ -1,18 +1,16 @@
 using Crafted.Data.Interfaces;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace Crafted.Data
 {
     public class MenuItem : BaseEntity, IItem, IImageable
     {
-        [Description("The name of the item displayed by BeerHub")]
         public string Name { get; set; }
 
-        [Description("The item's description that is displayed by BeerHub")]
+        public string InternalName { get; set; }
+
         public string Description { get; set; }
 
-        [Description("Comments about the item, not displayed by BeerHub")]
         public string Comment { get; set; }
 
         public float? ABV { get; set; }
@@ -21,7 +19,6 @@ namespace Crafted.Data
 
         public string Location { get; set; }
 
-        [Description("The price of the item, displayed by BeerHub if no Display Price is given")]
         public decimal? Price { get; set; }
 
         public bool Active { get; set; }
