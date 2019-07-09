@@ -2,9 +2,9 @@
 
 namespace Crafted.Data
 {
-    public class HelpRequest
+    public class HelpRequest : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey("UserId")]
         public AppUser User { get; set; }
