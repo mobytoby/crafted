@@ -7,10 +7,10 @@ namespace Crafted.Data
 {
     public class CraftedContext : IdentityDbContext<AppUser>
     {
-        public CraftedContext(DbContextOptions context): base(context) {}
+        public CraftedContext(DbContextOptions context) : base(context) { }
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<MenuItem> MenuItems { get; set; }        
+        public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Modification> Modifications { get; set; }
         public DbSet<ModificationCategory> ModificationCategories { get; set; }
         public DbSet<HelpRequest> HelpRequests { get; set; }
@@ -20,11 +20,11 @@ namespace Crafted.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            var cascadeFKs = builder.Model.GetEntityTypes()
+            IEnumerable<Microsoft.EntityFrameworkCore.Metadata.IMutableForeignKey> cascadeFKs = builder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetForeignKeys())
                 .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
-            foreach (var fk in cascadeFKs)
+            foreach (Microsoft.EntityFrameworkCore.Metadata.IMutableForeignKey fk in cascadeFKs)
             {
                 fk.DeleteBehavior = DeleteBehavior.Restrict;
             }
@@ -41,9 +41,9 @@ namespace Crafted.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<AppUserTable>()
-				.HasOne(aut => aut.Table)
-				.WithMany(aut => aut.AppUserTables)
-				.HasForeignKey(aut => aut.TableId)
+                .HasOne(aut => aut.Table)
+                .WithMany(aut => aut.AppUserTables)
+                .HasForeignKey(aut => aut.TableId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Category>(c =>
@@ -68,14 +68,14 @@ namespace Crafted.Data
             });
 
 
-            builder.Entity<Modification>(mod => 
+            builder.Entity<Modification>(mod =>
             {
                 mod.ToTable("Modifications");
                 mod.Property(m => m.DateCreated).HasDefaultValueSql("sysdatetimeoffset()");
                 mod.Property(m => m.DateModified).HasDefaultValueSql("sysdatetimeoffset()");
             });
 
-            builder.Entity<ModificationCategory>(mc => 
+            builder.Entity<ModificationCategory>(mc =>
             {
                 mc.ToTable("ModificationCategories");
                 mc.Property(m => m.DateCreated).HasDefaultValueSql("sysdatetimeoffset()");
@@ -83,7 +83,7 @@ namespace Crafted.Data
             });
 
 
-            builder.Entity<Order>(o => 
+            builder.Entity<Order>(o =>
             {
                 o.ToTable("Orders");
                 o.Property(m => m.DateCreated).HasDefaultValueSql("sysdatetimeoffset()");
@@ -104,7 +104,7 @@ namespace Crafted.Data
                 t.Property(m => m.DateCreated).HasDefaultValueSql("sysdatetimeoffset()");
                 t.Property(m => m.DateModified).HasDefaultValueSql("sysdatetimeoffset()");
             });
-                
+
         }
     }
 }

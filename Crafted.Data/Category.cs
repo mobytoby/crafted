@@ -3,7 +3,6 @@ using Crafted.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Crafted.Data
 {
@@ -23,7 +22,7 @@ namespace Crafted.Data
         public CategoryType CategoryType { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
-        
+
         public virtual ICollection<MenuItem> MenuItems { get; set; }
     }
 }

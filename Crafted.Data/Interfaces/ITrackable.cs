@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Crafted.Data.Interfaces
 {
@@ -9,7 +7,7 @@ namespace Crafted.Data.Interfaces
         int Id { get; set; }
 
         DateTimeOffset DateCreated { get; set; }
-        
+
         DateTimeOffset? DateModified { get; set; }
 
         string ChangedBy { get; set; }

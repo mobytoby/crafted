@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Crafted.Data
 {
-    public class Order: ITrackable
+    public class Order : ITrackable
     {
         [Key]
         public int Id { get; set; }

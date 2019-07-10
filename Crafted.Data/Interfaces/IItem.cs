@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Crafted.Data.Interfaces
+﻿namespace Crafted.Data.Interfaces
 {
     public interface IItem
     {

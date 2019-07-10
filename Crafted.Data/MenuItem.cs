@@ -33,7 +33,7 @@ namespace Crafted.Data
         public decimal? Price { get; set; }
 
         public bool Active { get; set; }
-        
+
         public string ImageUrl { get; set; }
 
         public virtual ICollection<ModificationCategory> ModificationCategories { get; set; }

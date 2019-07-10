@@ -22,7 +22,7 @@ namespace Crafted.Data
         public AppUser User { get; set; }
 
         public int? TableId { get; set; }
-        
+
         [ForeignKey("TableId")]
         public Table Table { get; set; }
     }

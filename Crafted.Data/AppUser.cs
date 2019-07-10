@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Crafted.Data
 {
@@ -13,7 +13,7 @@ namespace Crafted.Data
 
         public long? FacebookId { get; set; }
 
-        public long? GoogleId  { get; set; }
+        public long? GoogleId { get; set; }
 
         public string PictureUrl { get; set; }
 

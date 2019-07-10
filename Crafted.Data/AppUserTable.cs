@@ -1,5 +1,4 @@
-﻿using System;
-namespace Crafted.Data
+﻿namespace Crafted.Data
 {
     public class AppUserTable
     {
