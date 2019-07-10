@@ -1,16 +1,22 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Crafted.Data.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crafted.Data
 {
-    public class OrderItem : BaseEntity
+    public class OrderItem : ITrackable
     {
-        public int TableId { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        [ForeignKey("TableId")]
-        public Table Table { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
-        public int MenuItemId { get; set; }
+        public DateTimeOffset? DateModified { get; set; }
+
+        public string ChangedBy { get; set; }
+
+        public int? MenuItemId { get; set; }
 
         public MenuItem MenuItem { get; set; }
 

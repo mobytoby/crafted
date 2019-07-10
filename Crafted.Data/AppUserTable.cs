@@ -7,7 +7,7 @@ namespace Crafted.Data
 
         public AppUser AppUser { get; set; }
 
-        public int TableId { get; set; }
+        public int? TableId { get; set; }
 
         public Table Table { get; set; }
     }

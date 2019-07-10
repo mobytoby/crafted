@@ -1,10 +1,21 @@
 using Crafted.Data.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crafted.Data
 {
-    public class MenuItem : BaseEntity, IItem, IImageable
+    public class MenuItem : ITrackable, IItem, IImageable
     {
+        [Key]
+        public int Id { get; set; }
+
+        public DateTimeOffset DateCreated { get; set; }
+
+        public DateTimeOffset? DateModified { get; set; }
+
+        public string ChangedBy { get; set; }
+
         public string Name { get; set; }
 
         public string InternalName { get; set; }

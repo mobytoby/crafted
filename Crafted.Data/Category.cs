@@ -2,12 +2,22 @@
 using Crafted.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Crafted.Data
 {
-    public class Category : BaseEntity, IImageable
+    public class Category : ITrackable, IImageable
     {
+        [Key]
+        public int Id { get; set; }
+
+        public DateTimeOffset DateCreated { get; set; }
+
+        public DateTimeOffset? DateModified { get; set; }
+
+        public string ChangedBy { get; set; }
+
         public string ImageUrl { get; set; }
 
         public CategoryType CategoryType { get; set; }

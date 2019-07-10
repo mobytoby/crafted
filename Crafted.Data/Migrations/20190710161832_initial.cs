@@ -58,8 +58,8 @@ namespace Crafted.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
-                    DateModified = table.Column<DateTimeOffset>(nullable: true),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
                     ChangedBy = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
                     CategoryType = table.Column<int>(nullable: false),
@@ -74,6 +74,23 @@ namespace Crafted.Data.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tables",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
+                    ChangedBy = table.Column<string>(nullable: true),
+                    Number = table.Column<int>(nullable: false),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tables", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,10 +205,11 @@ namespace Crafted.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
-                    DateModified = table.Column<DateTimeOffset>(nullable: true),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
                     ChangedBy = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    InternalName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     ABV = table.Column<float>(nullable: true),
@@ -214,13 +232,95 @@ namespace Crafted.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUserTable",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    TableId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserTable", x => new { x.AppUserId, x.TableId });
+                    table.ForeignKey(
+                        name: "FK_AppUserTable_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AppUserTable_Tables_TableId",
+                        column: x => x.TableId,
+                        principalTable: "Tables",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HelpRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
+                    ChangedBy = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    TableId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HelpRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HelpRequests_Tables_TableId",
+                        column: x => x.TableId,
+                        principalTable: "Tables",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HelpRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
+                    ChangedBy = table.Column<string>(nullable: true),
+                    TableId = table.Column<int>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Tables_TableId",
+                        column: x => x.TableId,
+                        principalTable: "Tables",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ModificationCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
-                    DateModified = table.Column<DateTimeOffset>(nullable: true),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
                     ChangedBy = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -240,17 +340,47 @@ namespace Crafted.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
+                    ChangedBy = table.Column<string>(nullable: true),
+                    MenuItemId = table.Column<int>(nullable: true),
+                    OrderId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_MenuItems_MenuItemId",
+                        column: x => x.MenuItemId,
+                        principalTable: "MenuItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Modifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateCreated = table.Column<DateTimeOffset>(nullable: false),
-                    DateModified = table.Column<DateTimeOffset>(nullable: true),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false, defaultValueSql: "sysdatetimeoffset()"),
+                    DateModified = table.Column<DateTimeOffset>(nullable: true, defaultValueSql: "sysdatetimeoffset()"),
                     ChangedBy = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    ModificationCategoryId = table.Column<int>(nullable: true)
+                    ModificationCategoryId = table.Column<int>(nullable: true),
+                    OrderItemId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -261,7 +391,18 @@ namespace Crafted.Data.Migrations
                         principalTable: "ModificationCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Modifications_OrderItems_OrderItemId",
+                        column: x => x.OrderItemId,
+                        principalTable: "OrderItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUserTable_TableId",
+                table: "AppUserTable",
+                column: "TableId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -308,6 +449,16 @@ namespace Crafted.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HelpRequests_TableId",
+                table: "HelpRequests",
+                column: "TableId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HelpRequests_UserId",
+                table: "HelpRequests",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MenuItems_CategoryId",
                 table: "MenuItems",
                 column: "CategoryId");
@@ -321,10 +472,38 @@ namespace Crafted.Data.Migrations
                 name: "IX_Modifications_ModificationCategoryId",
                 table: "Modifications",
                 column: "ModificationCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Modifications_OrderItemId",
+                table: "Modifications",
+                column: "OrderItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_MenuItemId",
+                table: "OrderItems",
+                column: "MenuItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_TableId",
+                table: "Orders",
+                column: "TableId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppUserTable");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -341,22 +520,34 @@ namespace Crafted.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "HelpRequests");
+
+            migrationBuilder.DropTable(
                 name: "Modifications");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "ModificationCategories");
 
             migrationBuilder.DropTable(
-                name: "ModificationCategories");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "MenuItems");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Tables");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

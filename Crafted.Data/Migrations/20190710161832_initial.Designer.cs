@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crafted.Data.Migrations
 {
     [DbContext(typeof(CraftedContext))]
-    [Migration("20190605224117_initial")]
+    [Migration("20190710161832_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,6 +82,19 @@ namespace Crafted.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Crafted.Data.AppUserTable", b =>
+                {
+                    b.Property<string>("AppUserId");
+
+                    b.Property<int?>("TableId");
+
+                    b.HasKey("AppUserId", "TableId");
+
+                    b.HasIndex("TableId");
+
+                    b.ToTable("AppUserTable");
+                });
+
             modelBuilder.Entity("Crafted.Data.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -94,9 +107,13 @@ namespace Crafted.Data.Migrations
 
                     b.Property<string>("ChangedBy");
 
-                    b.Property<DateTimeOffset>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
-                    b.Property<DateTimeOffset?>("DateModified");
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
                     b.Property<string>("ImageUrl");
 
@@ -105,6 +122,35 @@ namespace Crafted.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Crafted.Data.HelpRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChangedBy");
+
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<int?>("TableId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TableId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("HelpRequests");
                 });
 
             modelBuilder.Entity("Crafted.Data.MenuItem", b =>
@@ -123,15 +169,21 @@ namespace Crafted.Data.Migrations
 
                     b.Property<string>("Comment");
 
-                    b.Property<DateTimeOffset>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
-                    b.Property<DateTimeOffset?>("DateModified");
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
                     b.Property<string>("Description");
 
                     b.Property<int?>("IBU");
 
                     b.Property<string>("ImageUrl");
+
+                    b.Property<string>("InternalName");
 
                     b.Property<string>("Location");
 
@@ -154,9 +206,13 @@ namespace Crafted.Data.Migrations
 
                     b.Property<string>("ChangedBy");
 
-                    b.Property<DateTimeOffset>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
-                    b.Property<DateTimeOffset?>("DateModified");
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
                     b.Property<string>("Description");
 
@@ -164,9 +220,13 @@ namespace Crafted.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("OrderItemId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ModificationCategoryId");
+
+                    b.HasIndex("OrderItemId");
 
                     b.ToTable("Modifications");
                 });
@@ -179,9 +239,13 @@ namespace Crafted.Data.Migrations
 
                     b.Property<string>("ChangedBy");
 
-                    b.Property<DateTimeOffset>("DateCreated");
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
-                    b.Property<DateTimeOffset?>("DateModified");
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
 
                     b.Property<string>("Description");
 
@@ -198,6 +262,89 @@ namespace Crafted.Data.Migrations
                     b.HasIndex("MenuItemId");
 
                     b.ToTable("ModificationCategories");
+                });
+
+            modelBuilder.Entity("Crafted.Data.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChangedBy");
+
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<int?>("TableId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TableId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Crafted.Data.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ChangedBy");
+
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<int?>("MenuItemId");
+
+                    b.Property<int?>("OrderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("Crafted.Data.Table", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("ChangedBy");
+
+                    b.Property<DateTimeOffset>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<DateTimeOffset?>("DateModified")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdatetimeoffset()");
+
+                    b.Property<int>("Number");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -310,11 +457,35 @@ namespace Crafted.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Crafted.Data.AppUserTable", b =>
+                {
+                    b.HasOne("Crafted.Data.AppUser", "AppUser")
+                        .WithMany("AppUserTables")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Crafted.Data.Table", "Table")
+                        .WithMany("AppUserTables")
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Crafted.Data.Category", b =>
                 {
                     b.HasOne("Crafted.Data.Category")
                         .WithMany("Categories")
                         .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("Crafted.Data.HelpRequest", b =>
+                {
+                    b.HasOne("Crafted.Data.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableId");
+
+                    b.HasOne("Crafted.Data.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Crafted.Data.MenuItem", b =>
@@ -329,6 +500,10 @@ namespace Crafted.Data.Migrations
                     b.HasOne("Crafted.Data.ModificationCategory")
                         .WithMany("Modifications")
                         .HasForeignKey("ModificationCategoryId");
+
+                    b.HasOne("Crafted.Data.OrderItem")
+                        .WithMany("Modifications")
+                        .HasForeignKey("OrderItemId");
                 });
 
             modelBuilder.Entity("Crafted.Data.ModificationCategory", b =>
@@ -336,6 +511,28 @@ namespace Crafted.Data.Migrations
                     b.HasOne("Crafted.Data.MenuItem")
                         .WithMany("ModificationCategories")
                         .HasForeignKey("MenuItemId");
+                });
+
+            modelBuilder.Entity("Crafted.Data.Order", b =>
+                {
+                    b.HasOne("Crafted.Data.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableId");
+
+                    b.HasOne("Crafted.Data.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Crafted.Data.OrderItem", b =>
+                {
+                    b.HasOne("Crafted.Data.MenuItem", "MenuItem")
+                        .WithMany()
+                        .HasForeignKey("MenuItemId");
+
+                    b.HasOne("Crafted.Data.Order")
+                        .WithMany("MenuItems")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
