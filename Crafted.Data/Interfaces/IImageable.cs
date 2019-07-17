@@ -2,6 +2,6 @@
 {
     internal interface IImageable
     {
-        string ImageUrl { get; set; }
+      int ImageId { get; set; }
     }
 }
