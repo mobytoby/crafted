@@ -33,6 +33,7 @@
     <Folder Include="Config\" />
     <Folder Include="Auth\" />
     <Folder Include="Util\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\IActionResult.cs" />

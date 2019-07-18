@@ -3,6 +3,7 @@ using Crafted.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Crafted.Data
 {
@@ -17,7 +18,10 @@ namespace Crafted.Data
 
         public string ChangedBy { get; set; }
 
-        public string ImageUrl { get; set; }
+        public int? ImageId { get; set; }
+
+        [ForeignKey("ImageId")]
+        public Image Image { get; set; }
 
         public CategoryType CategoryType { get; set; }
 

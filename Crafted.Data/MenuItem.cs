@@ -2,6 +2,7 @@ using Crafted.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Crafted.Data
 {
@@ -34,7 +35,10 @@ namespace Crafted.Data
 
         public bool Active { get; set; }
 
-        public string ImageUrl { get; set; }
+        public int? ImageId { get; set; }
+
+        [ForeignKey("ImageId")]
+        public Image Image { get; set; }
 
         public virtual ICollection<ModificationCategory> ModificationCategories { get; set; }
     }

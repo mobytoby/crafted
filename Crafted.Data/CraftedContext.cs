@@ -14,21 +14,13 @@ namespace Crafted.Data
         public DbSet<Modification> Modifications { get; set; }
         public DbSet<ModificationCategory> ModificationCategories { get; set; }
         public DbSet<HelpRequest> HelpRequests { get; set; }
+        public DbSet<Image> Images { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Table> Tables { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            IEnumerable<Microsoft.EntityFrameworkCore.Metadata.IMutableForeignKey> cascadeFKs = builder.Model.GetEntityTypes()
-                .SelectMany(t => t.GetForeignKeys())
-                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
-
-            foreach (Microsoft.EntityFrameworkCore.Metadata.IMutableForeignKey fk in cascadeFKs)
-            {
-                fk.DeleteBehavior = DeleteBehavior.Restrict;
-            }
-
             base.OnModelCreating(builder);
 
             builder.Entity<AppUserTable>()
@@ -58,6 +50,11 @@ namespace Crafted.Data
                 hr.ToTable("HelpRequests");
                 hr.Property(m => m.DateCreated).HasDefaultValueSql("sysdatetimeoffset()");
                 hr.Property(m => m.DateModified).HasDefaultValueSql("sysdatetimeoffset()");
+            });
+
+            builder.Entity<Image>(hr =>
+            {
+                hr.ToTable("Images");
             });
 
             builder.Entity<MenuItem>(mi =>
@@ -96,7 +93,6 @@ namespace Crafted.Data
                 oi.Property(m => m.DateCreated).HasDefaultValueSql("sysdatetimeoffset()");
                 oi.Property(m => m.DateModified).HasDefaultValueSql("sysdatetimeoffset()");
             });
-
 
             builder.Entity<Table>(t =>
             {
