@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Crafted.Api.Controllers
 {
     [Route("api/[controller]")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class MenuItemsController : ControllerBase
     {
@@ -22,6 +23,8 @@ namespace Crafted.Api.Controllers
         }
 
         [HttpGet]
+        [ApiConventionMethod(typeof(DefaultApiConventions),
+                     nameof(DefaultApiConventions.Get))]
         public ActionResult<IEnumerable<CreatedMenuItemDto>> Get()
         {
             var menuItems = Context.MenuItems.ToList();
@@ -30,6 +33,8 @@ namespace Crafted.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ApiConventionMethod(typeof(DefaultApiConventions),
+                     nameof(DefaultApiConventions.Get))]
         public ActionResult<MenuItemDto> Get(int id)
         {
             var item = Context.MenuItems.SingleOrDefault(i => i.Id == id);
@@ -37,10 +42,13 @@ namespace Crafted.Api.Controllers
             {
                 return NotFound();
             }
-            return Ok(item);
+            var dto = Mapper.Map<MenuItemDto>(item);
+            return Ok(dto);
         }
 
         [HttpPost]
+        [ApiConventionMethod(typeof(DefaultApiConventions),
+                     nameof(DefaultApiConventions.Post))]
         public void Post([FromBody]CreatedMenuItemDto menuItem)
         {
             var dbItem = Mapper.Map<MenuItem>(menuItem);
@@ -49,6 +57,8 @@ namespace Crafted.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [ApiConventionMethod(typeof(DefaultApiConventions),
+                     nameof(DefaultApiConventions.Put))]
         public IActionResult Put(int id,
             [FromBody] UpdatedMenuItemDto menuItem)
         {

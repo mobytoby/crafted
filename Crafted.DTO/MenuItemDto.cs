@@ -24,7 +24,7 @@ namespace Crafted.DTO
 
         public decimal? Price { get; set; }
 
-        public string ImageUrl { get; set; }
+        public int? ImageId { get; set; }
 
         public IEnumerable<ModificationCategoryDto> ModificationCategories { get; set; }
     }

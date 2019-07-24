@@ -28,6 +28,15 @@ namespace Crafted.Api.Controllers
         {
             var uploads = Path.Combine(Environment.WebRootPath, "uploads");
             var filename = Path.Combine(uploads, file.FileName);
+            var builder = new UriBuilder
+            {
+                Host = Request.Host.Host,
+                Port = Request.Host.Port ?? 80,
+                Path = "uploads",
+                Scheme = Request.Scheme,
+            };
+
+            var url = $"{builder.Uri}/{file.FileName}";
 
             if (file.Length > 0)
             {
@@ -38,11 +47,11 @@ namespace Crafted.Api.Controllers
                 var image = new Image
                 {
                     Name = file.FileName,
-                    ImageUrl = filename,
+                    ImageUrl = url.ToString(),
                 };
                 Context.Images.Add(image);
                 Context.SaveChanges();
-                return Created(new Uri($"{Request.Path}/uploads/{image.Id}", UriKind.Relative), image);
+                return Created(url, image);
             }
             return BadRequest();
         }
