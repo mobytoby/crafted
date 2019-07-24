@@ -75,6 +75,7 @@ namespace Crafted.Api
             });
             // Auto Mapper Configurations
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddSignalR();
             services.AddMvc();
         }
 
@@ -112,6 +113,7 @@ namespace Crafted.Api
 
             app.UseHttpsRedirection();
             app.UseCors("DevPolicy");
+            //app.UseSignalR(routes => routes.MapHub)
             app.UseMvc();
         }
     }
