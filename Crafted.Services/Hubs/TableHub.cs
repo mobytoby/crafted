@@ -1,16 +1,13 @@
-﻿using Crafted.Data;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace Crafted.Services.Hubs
 {
     public class TableHub : Hub
     {
-        public async Task SendOrder(Order order)
+        public async Task SendMessage(string user, string message)
         {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
 }

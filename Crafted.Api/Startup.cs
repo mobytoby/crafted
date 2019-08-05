@@ -9,6 +9,7 @@ using AutoMapper;
 using Crafted.Api.Config;
 using Crafted.Api.Mapping;
 using Crafted.Data;
+using Crafted.Services.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -113,7 +114,7 @@ namespace Crafted.Api
 
             app.UseHttpsRedirection();
             app.UseCors("DevPolicy");
-            //app.UseSignalR(routes => routes.MapHub)
+            app.UseSignalR(routes => routes.MapHub<TableHub>("/tableHub"));
             app.UseMvc();
         }
     }

@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Crafted.Data\Crafted.Data.csproj" />
     <ProjectReference Include="..\Crafted.DTO\Crafted.DTO.csproj" />
+    <ProjectReference Include="..\Crafted.Services\Crafted.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
