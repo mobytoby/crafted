@@ -24,7 +24,6 @@ namespace Crafted.Api.Controllers
             Mapper = mapper;
         }
 
-        //[ProducesResponseType(200, Type = typeof(IEnumerable<CategoryDto>))]
         [HttpGet]
         [ApiConventionMethod(typeof(DefaultApiConventions),
                      nameof(DefaultApiConventions.Get))]
@@ -46,6 +45,16 @@ namespace Crafted.Api.Controllers
                 return NotFound();
             }
             return Mapper.Map<CategoryDto>(category);
+        }
+
+        [HttpPost]
+        [ApiConventionMethod(typeof(DefaultApiConventions), 
+            nameof(DefaultApiConventions.Post))]
+        public void Post([FromBody] CreatedCategoryDto category)
+        {
+            var dbCat = Mapper.Map<Category>(category);
+            Context.Categories.Add(dbCat);
+            Context.SaveChanges();
         }
 
         [HttpPut("{id}")]
